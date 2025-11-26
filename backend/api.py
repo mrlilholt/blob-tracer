@@ -1,6 +1,7 @@
 # backend/api.py
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import uuid
@@ -19,9 +20,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Serve static files from the frontend directory
+app.mount("/static", StaticFiles(directory="../frontend"), name="static")
+
 # Where to store temp files (you can adjust if your host requires)
 TMP_DIR = tempfile.gettempdir()
 
+@app.get("/")
+async def read_root():
+    """Serve the frontend HTML page"""
+    return FileResponse("../frontend/index.html")
 
 @app.post("/process-video")
 async def process_video(
