@@ -1,7 +1,7 @@
 // frontend/main.js
 
 // Change this to your deployed backend URL:
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL = "https://blob-tracer-backend.onrender.com";
 
 const form = document.getElementById("blobForm");
 const statusEl = document.getElementById("status");
